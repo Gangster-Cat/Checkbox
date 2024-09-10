@@ -1,0 +1,46 @@
+@tailwind components;
+body {
+  background-color: aquamarine;
+}
+@layer components {
+  .checkbox-div{
+    @apply rounded-lg overflow-hidden w-[0.8125rem] h-[0.8125rem] bg-inherit border-[3px] border-solid border-[var(--checkbox-border-color)];
+  }
+  .checkbox-content {
+    @apply relative flex justify-center items-center w-full h-full;
+  }
+  .checkbox-icon {
+    @apply absolute w-5/6 h-5/6 pointer-events-none;
+  }
+  .checkbox-core {
+    @apply appearance-none w-full h-full m-0 bg-[var(--checkbox-color-fill)];
+  }
+  /* -------------------------------- */
+  .checkbox-basic ~ .checkbox-icon{
+    @apply opacity-0;
+  }
+  .checkbox-basic:checked ~ .checkbox-icon {
+    @apply opacity-100;
+  }
+  .checkbox-fade ~ .checkbox-icon {
+    @apply transition-opacity duration-150 opacity-0;
+  }
+  .checkbox-fade:checked ~ .checkbox-icon {
+    @apply opacity-100;
+  }
+  .checkbox-scale ~ .checkbox-icon {
+    @apply transition-all duration-150 w-0 h-0;
+  }
+  .checkbox-scale:checked ~ .checkbox-icon {
+    @apply w-5/6 h-5/6;
+  }
+  .checkbox-check {
+    @apply relative;
+  }
+  .checkbox-content:has(.checkbox-check)::before {
+    @apply z-[1] pointer-events-none left-0 -translate-y-1/2 transition-[left] duration-150 absolute content-[""] w-full h-full bg-[var(--checkbox-color-fill)];
+  }
+  .checkbox-content:has(.checkbox-check:checked)::before {
+    @apply left-full;
+  }
+}
